@@ -88,4 +88,3 @@ const STUDY_DECKS = [
     ]
   )
 ];
-

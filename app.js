@@ -553,4 +553,3 @@ try { if (localStorage.getItem(THEME_KEY) === 'dark') savedTheme = 'dark'; } cat
 applyTheme(savedTheme);
 render();
 updateNavigation();
-

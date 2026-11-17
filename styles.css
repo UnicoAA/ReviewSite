@@ -305,4 +305,3 @@ html[data-theme="dark"] .button-green:hover:not(:disabled) { color: #17211a; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
-

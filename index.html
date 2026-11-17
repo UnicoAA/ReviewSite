@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="A quiet, simple study space for flashcards, spaced review, and multiple-choice quizzes.">
+  <title>Study nook</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#today" data-nav="today" aria-label="Study nook home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>study nook</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-nav="today" type="button">Today</button>
+        <button class="nav-link" data-nav="flashcards" type="button">Flashcards</button>
+        <button class="nav-link" data-nav="quiz" type="button">Quiz</button>
+        <button class="nav-link" data-nav="decks" type="button">My decks</button>
+      </nav>
+      <div class="top-actions">
+        <button class="button button-light theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark mode</span></button>
+        <button class="button button-dark top-add" id="newDeckButton" type="button"><span aria-hidden="true">＋</span> New deck</button>
+      </div>
+    </header>
+
+    <main id="appView" class="main-content" tabindex="-1" aria-live="polite"></main>
+
+    <footer class="site-footer">
+      <span>Made for steady little study sessions.</span>
+      <span>Your decks and review progress stay in this browser.</span>
+    </footer>
+  </div>
+
+  <dialog class="modal" id="deckDialog" aria-labelledby="deckDialogTitle">
+    <form id="deckForm" method="dialog">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">YOUR LIBRARY</p>
+          <h2 id="deckDialogTitle">Create a deck</h2>
+        </div>
+        <button class="icon-button" type="button" data-close="deckDialog" aria-label="Close">×</button>
+      </div>
+      <input type="hidden" id="deckId">
+      <label class="field-label" for="deckTitle">Deck name</label>
+      <input class="text-input" id="deckTitle" name="title" maxlength="70" required placeholder="e.g. Biology — cell structure">
+      <label class="field-label" for="deckDescription">A short note <span class="muted">(optional)</span></label>
+      <textarea class="text-input textarea-short" id="deckDescription" name="description" maxlength="180" placeholder="What is this set about?"></textarea>
+      <div class="modal-actions">
+        <button class="button button-light" type="button" data-close="deckDialog">Cancel</button>
+        <button class="button button-dark" type="submit">Save deck</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal modal-wide" id="cardDialog" aria-labelledby="cardDialogTitle">
+    <form id="cardForm" method="dialog">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow" id="cardDeckName">YOUR DECK</p>
+          <h2 id="cardDialogTitle">Add a flashcard</h2>
+        </div>
+        <button class="icon-button" type="button" data-close="cardDialog" aria-label="Close">×</button>
+      </div>
+      <input type="hidden" id="cardDeckId">
+      <input type="hidden" id="cardId">
+      <label class="field-label" for="cardQuestion">Question / front</label>
+      <textarea class="text-input" id="cardQuestion" name="question" required rows="2" maxlength="350" placeholder="What do you want to remember?"></textarea>
+      <label class="field-label" for="cardAnswer">Answer / back</label>
+      <textarea class="text-input" id="cardAnswer" name="answer" required rows="2" maxlength="450" placeholder="Write the key idea in your own words."></textarea>
+      <label class="field-label" for="cardChoices">Three other quiz answers <span class="muted">(one per line)</span></label>
+      <textarea class="text-input" id="cardChoices" name="choices" required rows="3" maxlength="700" placeholder="A plausible answer\nAnother possible answer\nOne more answer"></textarea>
+      <p class="field-hint">These become the wrong options in multiple-choice quizzes. Keep them different from the correct answer.</p>
+      <label class="field-label" for="cardNote">Extra note <span class="muted">(optional)</span></label>
+      <input class="text-input" id="cardNote" name="note" maxlength="220" placeholder="A helpful clue or explanation">
+      <label class="field-label" for="cardSource">Source <span class="muted">(optional)</span></label>
+      <input class="text-input" id="cardSource" name="source" maxlength="100" placeholder="e.g. Chapter 2, page 14">
+      <div class="modal-actions">
+        <button class="button button-light" type="button" data-close="cardDialog">Cancel</button>
+        <button class="button button-dark" type="submit">Save flashcard</button>
+      </div>
+    </form>
+  </dialog>
+
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
